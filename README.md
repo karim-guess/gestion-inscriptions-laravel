@@ -37,7 +37,7 @@ php artisan migrate
 Lancer le serveur local :
 
 php artisan serve
-L’application sera accessible sur http://127.0.0.1:8000.
+L’application sera accessible sur http://127.0.0.1:8000/formulaire
 
 CSS
 Le CSS est directement placé dans le dossier public/css.
