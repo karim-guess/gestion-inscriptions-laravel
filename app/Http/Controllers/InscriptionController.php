@@ -75,7 +75,13 @@ public function update(Request $request, Inscription $inscription)
         'statut' => 'required|string',
     ]);
 
-    $inscription->update($request->all());
+    $inscription->update([
+    'nom' => $request->nom,
+    'email' => $request->email,
+    'telephone' => $request->telephone,
+    'statut' => $request->statut,
+    'created_at' => $request->date_inscription,
+]);
 
     return redirect()
         ->route('inscriptions.index')

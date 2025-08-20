@@ -70,17 +70,17 @@
                     <td><span class="badge">
                         {{ $i->statut === 'validee' ? 'Validée' : ($i->statut === 'en_attente' ? 'En attente' : 'Dossier incomplet') }}
                     </span></td>
-                    <td class="actions">
-    <a href="{{ route('inscriptions.edit', $i) }}">Modifier</a>
+     <td class="actions">
+        <a href="{{ route('inscriptions.edit', $i) }}">Modifier</a>
 
-    <form action="{{ route('inscriptions.destroy', $i) }}" method="POST" style="display:inline">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="link-button" onclick="return confirm('Supprimer cette inscription ?')">
-            Supprimer
-        </button>
-    </form>
-</td>
+            <form action="{{ route('inscriptions.destroy', $i) }}" method="POST"        style="display:inline">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="link-button" onclick="return confirm('Supprimer cette inscription ?')">
+                    Supprimer
+                </button>
+            </form>
+    </td>
                 </tr>
             @empty
                 <tr><td colspan="6">Aucune inscription trouvée.</td></tr>

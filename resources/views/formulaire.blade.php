@@ -9,32 +9,47 @@
         <p>Ajouter un nouveau participant à la formation "Psycho Praticien".</p>
     </header>
 
-    <form action="{{ route('inscriptions.store') }}" method="POST" class="inscription-form">
+    <form action="{{ isset($inscription) ? route('inscriptions.update', $inscription->id) : route('inscriptions.store') }}" method="POST" class="inscription-form">
         @csrf
+            @if(isset($inscription))
+                    @method('PUT')
+                @endif
 
-        <div class="form-group">
-            <label for="nom">Nom complet</label>
-            <input type="text" id="nom" name="nom" placeholder="Ex: Jean Dupont" value="{{ old('nom') }}" required>
-            @error('nom') <div class="error">{{ $message }}</div> @enderror
-        </div>
+
+
+              <div class="form-group">
+                    <label for="nom">Nom complet</label>
+                    <input type="text" id="nom" name="nom" placeholder="Ex: Jean Dupont"
+                        value="{{ old('nom', $inscription->nom ?? '') }}" class="form-control" required>
+                          @error('nom') <div class="form-error">{{ $message }}</div> @enderror
+            </div>
+
+
+
 
         <div class="form-group">
             <label for="email">Adresse e-mail</label>
-            <input type="email" id="email" name="email" placeholder="Ex: jean.dupont@email.com" value="{{ old('email') }}" required>
+            <input type="email" id="email" name="email" placeholder="Ex: jean.dupont@email.com" value="{{ old('email', $inscription->email ?? '') }}" required>
             @error('email') <div class="error">{{ $message }}</div> @enderror
         </div>
 
+
+
         <div class="form-group">
             <label for="telephone">Téléphone</label>
-            <input type="tel" id="telephone" name="telephone" placeholder="Ex: 06 12 34 56 78" value="{{ old('telephone') }}">
+            <input type="tel" id="telephone" name="telephone" placeholder="Ex: 06 12 34 56 78" value="{{ old('telephone', $inscription->telephone ?? '') }}">
             @error('telephone') <div class="error">{{ $message }}</div> @enderror
         </div>
         
         <div class="form-group">
-            <label for="date_inscription">Date d'inscription</label>
-            <input type="date" id="date_inscription" name="date_inscription" value="{{ old('date_inscription') }}" required>
-            @error('date_inscription') <div class="error">{{ $message }}</div> @enderror
-        </div>
+    <label for="date_inscription">Date d'inscription</label>
+    <input type="date" 
+           id="date_inscription" 
+           name="date_inscription" 
+           value="{{ old('date_inscription', isset($inscription) ? $inscription->created_at->format('Y-m-d') : '') }}" 
+           required>
+    @error('date_inscription') <div class="error">{{ $message }}</div> @enderror
+</div>
 
         <div class="form-group">
             <label for="statut">Statut de l'inscription</label>
@@ -48,7 +63,7 @@
         </div>
 
         <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Enregistrer l'inscription</button>
+            <button type="submit" class="btn btn-primary">{{ isset($inscription) ? 'Modifier l\'inscription' : 'Enregistrer l\'inscription' }}</button>
             <a href="{{ route('inscriptions.index') }}" class="btn btn-secondary">Annuler</a>
         </div>
     </form>

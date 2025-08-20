@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Inscription extends Model
 {
-    protected $fillable = ['nom', 'email', 'statut', 'prioritaire'];
+    protected $fillable = ['nom', 'email', 'statut', 'prioritaire', 'created_at', 'telephone'];
 }
