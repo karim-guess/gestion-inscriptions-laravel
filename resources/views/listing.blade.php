@@ -89,11 +89,41 @@
         </table>
 
         <!-- Bonus: pagination 10 / page -->
-        <div class="pagination">
-            {{ $inscriptions->links() }}
-        </div>
+       
+
+<div class="flex justify-center items-center mt-10">
+    <nav class="inline-flex space-x-4">
+        {{-- Bouton précédent --}}
+        @if($inscriptions->onFirstPage())
+            <span class="px-6 py-4 bg-gray-300 text-gray-500 rounded-lg font-bold cursor-not-allowed">Précédent</span>
+        @else
+            <a href="{{ $inscriptions->previousPageUrl() }}" class="px-6 py-4 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700">Précédent</a>
+        @endif
+
+        {{-- Pages --}}
+        @foreach ($inscriptions->getUrlRange(1, $inscriptions->lastPage()) as $page => $url)
+            <a href="{{ $url }}" class="px-5 py-4 rounded-lg font-bold text-lg {{ $page == $inscriptions->currentPage() ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300' }}">
+                {{ $page }}
+            </a>
+        @endforeach
+
+        {{-- Bouton suivant --}}
+        @if($inscriptions->hasMorePages())
+            <a href="{{ $inscriptions->nextPageUrl() }}" class="px-6 py-4 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700">Suivant</a>
+        @else
+            <span class="px-6 py-4 bg-gray-300 text-gray-500 rounded-lg font-bold cursor-not-allowed">Suivant</span>
+        @endif
+    </nav>
+</div>
+
+
+
+        
     </div>
 
     
+    
 </div>
+
+
 @endsection
