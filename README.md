@@ -21,30 +21,21 @@ git clone <repo_url>
 cd nom_du_projet
 Installer les dépendances PHP :
 
-bash
-Copier
-Modifier
 composer install
+
 Configurer le fichier .env :
 
-bash
-Copier
-Modifier
-cp .env.example .env
+copy .env.example .env
 php artisan key:generate
+
 Puis configure ta base de données dans .env.
 
 Migrer la base de données :
 
-bash
-Copier
-Modifier
 php artisan migrate
+
 Lancer le serveur local :
 
-bash
-Copier
-Modifier
 php artisan serve
 L’application sera accessible sur http://127.0.0.1:8000.
 
